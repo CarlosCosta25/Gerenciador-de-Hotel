@@ -1,0 +1,31 @@
+.botao_editar {
+    display: inline-block;
+    width: 25px;
+    /* ajuste conforme necessário */
+    height: 25px;
+    /* ajuste conforme necessário */
+    background-image: url('/imagens/editar.png');
+    background-size: cover;
+}
+
+.botao_apagar {
+    display: inline-block;
+    width: 25px;
+    /* ajuste conforme necessário */
+    height: 25px;
+    /* ajuste conforme necessário */
+    background-image: url('/imagens/apagar.png');
+    background-size: cover;
+}
+
+
+.btn-primary {
+    text-align: end;
+    margin-top: 5px;
+    width: auto;
+    height: auto;
+    justify-content: flex-end;
+    margin-left: 82%;
+    overflow: visible;
+    align-items: center;
+}
