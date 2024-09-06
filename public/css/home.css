@@ -15,41 +15,18 @@ body {
     font-family: Arial, sans-serif;
     display: block;
     font-family: Georgia, 'Times New Roman', Times, serif;
-
 }
-
-.navBar {
-    position: fixed;
-    background-color: #1E90FF;
-    margin-bottom: 100%;
-    position: fixed;
-    display: flex;
-    height: 100vh;
-    width: 25%;
-    flex-direction: column;
-    padding-top: 5px;
-    align-self: center;
-}
-
-/*.infoHotel{
-    background-image: url('/imagens/fundo-menu.jpg');;
-    margin-top: 0%;
-    width:297px;
-    height: 170px;
-    margin-left: 2px;
-    margin-right: 3px;
-}*/
-.tituloNavBar {
+.titulomenuBar {
     color: white;
     text-align: center;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 8%;
 }
 
 .logoHotel {
     display: block;
     margin: 0 auto;
-    width: 100px;
+    width: 40%;
     /* Ajuste conforme necessário */
     margin-bottom: 20px;
     border-radius: 50%;
@@ -72,14 +49,11 @@ body {
 
 }
 
-.navButton:hover {
-    background-color: #ffc107;
-}
-
-
 .dropdown {
     position: relative;
     display: inline-block;
+    width: 100%;
+    max-width: 100%;
 }
 
 .dropdown-content {
@@ -136,6 +110,11 @@ body {
 .dropdownButton {
     color: white;
     text-decoration: none;
+    max-width: 100%;
+    min-width: 100%;
+}
+.dropdownButton:hover{
+    background-color: blue;
 }
 
 .navButton:hover {
@@ -145,8 +124,8 @@ body {
 .menu {
     font-family: 'Lovelyn', sans-serif;
     font-size: 20px;
-    width: 100%;
-    height: auto;
+    width: 25%;
+    height: 100vh;
     margin-right: 5px;
     color: white;
     padding-left: 20px;
@@ -156,24 +135,46 @@ body {
     text-align: center;
 
 }
-
+.menuBar {
+    background-color: #1E90FF;
+    margin-bottom: 100%;
+    position: fixed;
+    display: flex;
+    height: 110vh;
+    width: 25%;
+    flex-direction: column;
+    align-self: center;
+    margin-top: -5%;
+}
+.barras{
+    margin: 0;
+    padding: 0;
+}
+main{
+    margin: 0;
+    padding: 0;
+    min-height: 87%;
+ }
 .conteudo {
-    margin-left: 25%;
-    height: 94%;
+    margin-left:25%;
+    height: 100%;
+    min-height: 100%;
+    width: 75%;
     background-color: white;
     align-items: center;
-    overflow: scroll;
+    overflow-x: hidden; /* Oculta a rolagem horizontal */
 }
 
-.barra {
+.navBar {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 10px 30px;
     color: white;
     top:0;
-    height: 50px;
-    width: 100%;
+    margin-left:25%;
+    height: 7%;
+    width: 75%;
     left: 2px;
     box-shadow: inset 0 -5px 10px -10px rgba(0, 0, 0, 0.5);
 
@@ -202,5 +203,6 @@ body {
     margin-right: 5%;
     color:white;
  }
+ 
   
   

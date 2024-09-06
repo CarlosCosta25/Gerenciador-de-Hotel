@@ -1,5 +1,6 @@
 @extends('main')
 @section('content')
+
     <form action="{{ route('hospedes.store') }}" method="post">
         @csrf
 
@@ -10,7 +11,8 @@
 
         <div class="mb-3">
             <label for="sobrenome" class="form-label">Sobrenome:</label>
-            <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Digite seu sobrenome" required>
+            <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Digite seu sobrenome"
+                required>
         </div>
 
         <div class="mb-3">
@@ -83,4 +85,10 @@
 
         <button type="submit" class="btn btn-primary">Cadastrar Hóspede</button>
     </form>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+           <p>{{$error}} </p>
+        @endforeach
+    @endif
+    
 @endsection

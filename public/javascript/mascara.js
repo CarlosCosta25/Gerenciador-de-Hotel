@@ -36,3 +36,21 @@
         // Atualiza o valor do input
         input.value = value;
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const dinheiroInput = document.getElementById('valor');
+
+        dinheiroInput.addEventListener('input', function(e) {
+            let valor = e.target.value;
+
+            // Remove qualquer caractere que não seja número ou vírgula
+            valor = valor.replace(/\D/g, '');
+
+            // Transforma o valor em formato de moeda
+            valor = (valor / 100).toFixed(2) + ''; // Divide por 100 para posicionar as casas decimais
+            valor = valor.replace('.', ','); // Substitui o ponto pela vírgula
+            valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Adiciona os pontos separadores de milhar
+
+            e.target.value = valor;
+        });
+    });

@@ -11,12 +11,12 @@ class AcomodacoesController extends Controller
     public function index()
     {
         $acomodacoes = Acomodacoes::where('ativo',true)->get();
+        foreach ($acomodacoes as $acomodacao){
+            $acomodacao->valor = $this->mascaraDinheiro($acomodacao->valor);
+        }
         return view('acomodacao\index',compact('acomodacoes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('acomodacao\create');
@@ -32,16 +32,16 @@ class AcomodacoesController extends Controller
         'descricao' => 'required|string',
         'facilidades' => 'required|string',
         'categoria' => 'required|in:Standard,Deluxe,Suíte,Familiar,Adaptado,Varanda',
-        'valor' => 'required|numeric',
         'qtd_pessoas' => 'required|integer',
 
         ]);
+        $validatedData['valor'] = $this->removeMascaraDinheiro($request->valor);
         $validatedData['ativo'] = true;
 
         // Crie um novo hospede com os dados validados
         $hospede = Acomodacoes::create($validatedData);
         $hospede->save();
-        return to_route('hospedes.index')->with('success', 'Hospede cadastrado com sucesso!');
+        return to_route('acomodacao.index')->with('success', 'Acomodacao cadastrada com sucesso!');
     }
 
     /**
@@ -50,6 +50,7 @@ class AcomodacoesController extends Controller
     public function show(string $id)
     {
         $acomodacao = Acomodacoes::find($id);
+        $acomodacao->valor = $this->mascaraDinheiro($acomodacao->valor);
         return view('acomodacao\show',compact('acomodacao'));
     }
 
@@ -59,6 +60,7 @@ class AcomodacoesController extends Controller
     public function edit(string $id)
     {
          $acomodacao = Acomodacoes::find($id);
+         $acomodacao->valor = $this->mascaraDinheiro($acomodacao->valor);
          $categorias = ['Standard', 'Deluxe', 'Suíte', 'Familiar', 'Adaptado', 'Varanda'];
         return view('acomodacao\edit',compact('acomodacao','categorias'));
     }
@@ -73,10 +75,10 @@ class AcomodacoesController extends Controller
             'descricao' => 'required|string',
             'facilidades' => 'required|string',
             'categoria' => 'required|in:Standard,Deluxe,Suíte,Familiar,Adaptado,Varanda',
-            'valor' => 'required|numeric',
             'qtd_pessoas' => 'required|integer',
 
             ]);
+            $validatedData['valor'] = $this->removeMascaraDinheiro($request->valor);
             $validatedData['ativo'] = true;
             $acomodacao = Acomodacoes::findOrFail($id);
 
@@ -96,4 +98,14 @@ class AcomodacoesController extends Controller
 
         return to_route('acomodacoes.index')->with('success', 'Acomodacao apagado com sucesso!');
     }
+
+    private function removeMascaraDinheiro($valor)
+{  
+    $valor = str_replace('.', '', $valor);
+    return str_replace(',', '.', $valor);
+}
+    private function mascaraDinheiro($valor){
+    return number_format($valor, 2, ',', '.');
+}
+
 }

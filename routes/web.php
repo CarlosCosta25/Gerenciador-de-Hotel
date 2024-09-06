@@ -1,14 +1,35 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\HospedesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HospedesController;
 use App\Http\Controllers\AcomodacoesController;
 use App\Http\Controllers\ReservasController;
+use App\Http\Controllers\UserController;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
+/*Route::get('/', function () {
+    return view('dashboard');
+});*/
+/*Route::get('/dashboard',function(){
+    return view('dashboard');
+});*/
 
-Route::get('/', [HospedesController::class,'index'])->name('hospedes.index');
-Route::prefix('hospedes')->group(function () {
+Route::get('/home',function (){
+    return view('home');
+})->middleware('auth');
+
+Route::prefix('/hospedes')->group(function () {
+    Route::get('/', [HospedesController::class,'index'])->name('hospedes.index');
     Route::get('/create', [HospedesController::class, 'create'])->name('hospedes.create');
     Route::post('/', [HospedesController::class, 'store'])->name('hospedes.store');
     Route::get('/{id}/show', [HospedesController::class, 'show'])->name('hospedes.show');
@@ -38,3 +59,16 @@ Route::prefix('reservas')->group(function () {
     Route::put('/{id}', [ReservasController::class, 'update'])->name('reservas.update');
     Route::patch('/{id}', [ReservasController::class, 'destroy'])->name('reservas.destroy');
 });
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
